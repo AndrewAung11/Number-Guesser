@@ -35,27 +35,31 @@ hpg = hn
 
 #main guessing process
 while !found
-  ans = hpg/2
-  #if answer is only in range
-  if ans >= ln && ans <= hn
-    guess = sGuess(ans)
-    if guess == 0
+  guess = hpg/2
+  #if guess is only in range
+  if guess >= ln && guess <= hn
+    #ask if the number is equal to guess
+    ok = sGuess(guess)
+    #if not
+    if ok == 0
+      #ask the condition of the guess
       cdt = ask
       #if no more number left
-      if ans == hn && cdt != 1
+      if guess == hn && cdt != 1
         raise "No more number to guess!"
-      elsif ans == ln && cdt != 0
+      elsif guess == ln && cdt != 0
         raise "No more number to guess!"
       end
+      #if condition is high
       if cdt == 1
         hpg = hpg - range
-      elsif cdt == 0
+      elsif cdt == 0 #if condition is low
         hpg = hpg + range
       end
-    elsif guess == 1
+    elsif ok == 1 #if number is equal to guess
       found = true
     end
   end
   system "clear"
-  range = range - 2
+  range = range - 2 #decrease range after every guess
 end
